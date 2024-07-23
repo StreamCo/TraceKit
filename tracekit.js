@@ -244,8 +244,9 @@ TraceKit.report = (function reportModuleWrapper() {
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PromiseRejectionEvent
      */
     function traceKitWindowOnUnhandledRejection(e) {
-        var stack = TraceKit.computeStackTrace(e.reason);
-        notifyHandlers(stack, true, e.reason);
+        const errorObj = e.reason || {}
+        var stack = TraceKit.computeStackTrace(errorObj);
+        notifyHandlers(stack, true, errorObj);
     }
 
     /**
